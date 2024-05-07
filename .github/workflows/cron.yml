@@ -133,3 +133,11 @@ jobs:
           full_commit_message: ${{ steps.message.outputs.result }}
           force_orphan: true
           enable_jekyll: true
+
+      - name: Delete Workflow Runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 1
+          keep_minimum_runs: 1
