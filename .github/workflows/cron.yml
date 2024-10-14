@@ -13,10 +13,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.2.1
 
       - name: Checkout data source
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.2.1
         with: 
           repository: v2fly/domain-list-community
           path: domain-list-community
@@ -34,9 +34,6 @@ jobs:
       - name: Generate
         run: |
           cd domain-list-community
-          
-          cd ../clash
-          go run main.go ../domain-list-community ../release/clash
 
           cd ../loon
           go run main.go ../domain-list-community ../release/loon
@@ -48,23 +45,6 @@ jobs:
           go run main.go ../domain-list-community ../release/surge
 
           cd ..
-
-          cat ./release/clash/cn.txt | grep -Ev '^$|#|payload' > 1.tmp
-          cat ./release/clash/cn@\!cn.txt | grep -Ev '^$|#|payload' > 2.tmp
-          cat ./release/clash/geolocation-\!cn.txt | grep -Ev '^$|#|payload' > 3.tmp
-          cat ./release/clash/geolocation-\!cn@cn.txt | grep -Ev '^$|#|payload' > 4.tmp
-          cat 1.tmp 2.tmp 2.tmp | sort | uniq -u > 5.tmp
-          cat 5.tmp 4.tmp | sort | uniq > 6.tmp
-          cat 3.tmp 4.tmp 4.tmp | sort | uniq -u > 7.tmp
-          cat 7.tmp 2.tmp | sort | uniq > 8.tmp
-          sed -e '/+/d' 6.tmp > 61.tmp
-          cat 6.tmp 61.tmp | sort | uniq -u > 62.tmp
-          cat 61.tmp 62.tmp > 63.tmp
-          sed -e '/+/d' 8.tmp > 81.tmp
-          cat 8.tmp 81.tmp | sort | uniq -u > 82.tmp
-          cat 81.tmp 82.tmp > 83.tmp
-          sed '1i# Generated from https://github.com/v2fly/domain-list-community/tree/master/data/cn\n\n# Behavior: domain\n\npayload:' 63.tmp > ./release/clash/cn.txt
-          sed '1i# Generated from https://github.com/v2fly/domain-list-community/tree/master/data/geolocation-!cn\n\n# Behavior: domain\n\npayload:' 83.tmp > ./release/clash/geolocation-\!cn.txt
 
           cat ./release/loon/cn.txt | grep -Ev '^$|#' > 1.tmp
           cat ./release/loon/cn@\!cn.txt | grep -Ev '^$|#' > 2.tmp
