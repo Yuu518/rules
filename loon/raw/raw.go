@@ -22,17 +22,12 @@ var raws = []*Raw{
 	{
 		Name:      "cn-ips",
 		Behavior:  "ipcidr",
-		SourceUrl: "https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt",
-	},
-	{
-		Name:      "cn6-ips",
-		Behavior:  "ipcidr",
-		SourceUrl: "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china6.txt",
+		SourceUrl: "https://raw.githubusercontent.com/Yuu518/geoip/release/text/cn.txt",
 	},
 	{
 		Name:      "local-ips",
 		Behavior:  "ipcidr",
-		SourceUrl: "https://gist.githubusercontent.com/Kr328/927492746f728ac0b1c5e4b1660ca260/raw/local-ip-list.txt",
+		SourceUrl: "https://raw.githubusercontent.com/Yuu518/geoip/release/text/private.txt",
 	},
 	{
 		Name:      "public-dns",
